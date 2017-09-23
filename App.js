@@ -38,14 +38,22 @@ class Clock extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            coins: 9,
+            coins: 0,
         }
         setInterval(() => {
             this.setState({
-                coins: this.state.coins + 1
+                coins: this.state.coins + GLOBAL.MULTIPLY - GLOBAL.SUBTRACT
             });
+            GLOBAL.COINS = this.state.coins;
+            GLOBAL.SUBTRACT = 0;
         }, 1000);
     }
+
+    // increase() {
+    //     setInterval(() => {
+    //         GLOBAL.COINS = GLOBAL.COINS + GLOBAL.MULTIPLY;
+    //     }, 1000);
+    // }
 
     render() {
         return (
@@ -58,33 +66,58 @@ class ProfileScreen extends React.Component {
     static navigationOptions = {
         title: 'Welcome',
     };
+
+    increaseMultiply() {
+        if (GLOBAL.COINS >= 10) {
+            GLOBAL.MULTIPLY = GLOBAL.MULTIPLY + 1;
+            GLOBAL.SUBTRACT = 10;
+        }
+    }
     render() {
         const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
                 <Clock />
+                {/*<Button*/}
+                    {/*onPress={() => navigate('Store')}*/}
+                    {/*title="STORE"*/}
+                    {/*color="white"*/}
+                {/*/>*/}
+                <Image source={require('./firstchar.png')} style={{width:50, height:50,marginBottom:20,marginLeft:13}}/>
                 <Button
-                    onPress={() => navigate('Store')}
-                    title="STORE"
-                    color="white"
+                    onPress={() => this.increaseMultiply()}
+                    title="Hire One Worker"
+                    color="grey"
+                    style={styles.hireText}
                 />
             </View>
+
+
         );
     }
 }
+
 
 class Store extends React.Component {
     static navigationOptions = {
         title: 'Store',
     };
+
+    increaseMultiply() {
+        if (GLOBAL.COINS >= 10) {
+            GLOBAL.MULTIPLY = GLOBAL.MULTIPLY + 1;
+            GLOBAL.SUBTRACT = 10;
+        }
+    }
+
     render() {
         const { navigate } = this.props.navigation;
         return (
             <View style={styles.container2}>
-                < Clock/>
+                {/*< Clock/>*/}
                 <Image source={require('./firstchar.png')} style={{width:50, height:50,marginBottom:20,marginLeft:13}}/>
                 <Button
-                    onPress={() => navigate('Store')}
+                    onPress={() => this.increaseMultiply()}
                     title="Hire One Worker"
                     color="grey"
                     style={styles.hireText}
