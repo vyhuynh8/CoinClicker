@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button, StyleSheet, Text, View, AppRegistry, Image, Alert, NavigatorIOS} from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import * as GLOBAL from './Globals';
 
-var coins = 90;
+GLOBAL.COINS = 0;
 
 class HomeScreen extends React.Component {
 
@@ -17,14 +18,9 @@ class HomeScreen extends React.Component {
         const { navigate } = this.props.navigation;
         return (
 
-            //<Image source={pic} style={{width:253, height:190}}/>
             <View style={styles.container}>
                 <Image source={require('./10080.png')} style={{width:150, height:150,marginBottom:20}}/>
                 <Text style={styles.text}>Coin Clicker</Text>
-                {/*<Greeting name='Rexxar' />*/}
-                {/*<Greeting name='Jaina' />*/}
-                {/*<Greeting name='Valeera' />*/}
-                {/*<View style={{width: 50, height: 50, backgroundColor: 'powderblue'}} />*/}
                 <Button
                     onPress={() => navigate('Chat')}
                     title="START"
@@ -42,7 +38,7 @@ class Clock extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            coins: 9
+            coins: 9,
         }
         setInterval(() => {
             this.setState({
@@ -53,7 +49,7 @@ class Clock extends React.Component {
 
     render() {
         return (
-            <Text>{this.state.coins}</Text>
+            <Text style={styles.text}>{this.state.coins} MONEYS</Text>
         );
     }
 }
@@ -65,7 +61,36 @@ class ProfileScreen extends React.Component {
     render() {
         const { navigate } = this.props.navigation;
         return (
-            <Clock />
+            <View style={styles.container}>
+                <Clock />
+                <Button
+                    onPress={() => navigate('Store')}
+                    title="STORE"
+                    color="white"
+                />
+            </View>
+        );
+    }
+}
+
+class Store extends React.Component {
+    static navigationOptions = {
+        title: 'Store',
+    };
+    render() {
+        const { navigate } = this.props.navigation;
+        return (
+            <View style={styles.container2}>
+                < Clock/>
+                <Image source={require('./firstchar.png')} style={{width:50, height:50,marginBottom:20,marginLeft:13}}/>
+                <Button
+                    onPress={() => navigate('Store')}
+                    title="Hire One Worker"
+                    color="grey"
+                    style={styles.hireText}
+                />
+                {/*<Text style={styles.hireText}>Hire One Worker</Text>*/}
+            </View>
         );
     }
 }
@@ -73,6 +98,7 @@ class ProfileScreen extends React.Component {
 const SimpleApp = StackNavigator({
     Home: { screen: HomeScreen },
     Chat: { screen: ProfileScreen },
+    Store: { screen: Store },
 });
 
 export default class App extends React.Component {
@@ -94,9 +120,9 @@ const styles = StyleSheet.create({
     },
     container2: {
         flex: 1,
-        flexDirection: 'column',
+        flexDirection: 'row',
         //justifyContent: 'center',
-        alignItems: 'center',
+        //alignItems: 'center',
         paddingTop: 20,
     },
     red: {
@@ -109,5 +135,16 @@ const styles = StyleSheet.create({
         fontFamily: 'Avenir-Black',
         //fontWeight: '700'
 
+    },
+
+    hireText: {
+        paddingTop:13,
+        paddingLeft:13,
+        fontSize: 20,
+        color: 'grey',
+        fontFamily: 'Avenir-Black',
+        //fontWeight: '700'
     }
+
+
 });
