@@ -37,35 +37,35 @@ class HomeScreen extends React.Component {
     }
 }
 
-// function myFunction() {
-//     // while(true) {
-//     //     coins += 1;
-//     // }
-//     document.getElementById("demo").innerHTML = "Current Balance: {coins}";
-//     return coins;
-// }
+
+class Clock extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            coins: 9
+        }
+        setInterval(() => {
+            this.setState({
+                coins: this.state.coins + 1
+            });
+        }, 1000);
+    }
+
+    render() {
+        return (
+            <Text>{this.state.coins}</Text>
+        );
+    }
+}
 
 class ProfileScreen extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            myText: 'My Original Text'
-        }
-    }
-    updateText = () => {
-        this.setState({myText: 'My Changed Text'})
-    }
     static navigationOptions = {
         title: 'Welcome',
     };
     render() {
         const { navigate } = this.props.navigation;
         return (
-            <View style={styles.container2}>
-                <Text onPress = {this.updateText}>
-                    {this.state.myText}
-                </Text>
-            </View>
+            <Clock />
         );
     }
 }
@@ -111,39 +111,3 @@ const styles = StyleSheet.create({
 
     }
 });
-
-// // export default class App extends React.Component {
-// //     _onPressButton() {
-// //         Alert.alert('You tapped the button!')
-// //     }
-// //   render() {
-// //     // return (
-// //       //   <View style={styles.container}>
-// //       //     <Text>Ope working on your app!</Text>
-// //       //     <Text>Changes you make will automatically reload.</Text>
-// //       //     <Text>Shake your phone to open the developer menu.</Text>
-// //       //   </View>
-// //       // );
-// //
-// //       return (
-// //           //<Image source={pic} style={{width:253, height:190}}/>
-// //           <View style={styles.container}>
-// //               <Image source={require('./10080.png')} style={{width:150, height:150,marginBottom:20}}/>
-// //               <Text style={styles.text}>Coin Clicker</Text>
-// //               {/*<Greeting name='Rexxar' />*/}
-// //               {/*<Greeting name='Jaina' />*/}
-// //               {/*<Greeting name='Valeera' />*/}
-// //               {/*<View style={{width: 50, height: 50, backgroundColor: 'powderblue'}} />*/}
-// //               <Button
-// //                   onPress={this._onPressButton}
-// //                   title="START"
-// //                   color="white"
-// //                   accessibilityLabel="Learn more about this purple button"
-// //               />
-// //           </View>
-// //       );
-// //
-// //
-// //   }
-// // }
-//
